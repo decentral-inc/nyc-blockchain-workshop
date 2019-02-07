@@ -5,3 +5,5 @@ authors = ["hskang9 <hskang9@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+secp256k1 = {version="0.12.2", features= ["rand"]}
+rand = "0.4"

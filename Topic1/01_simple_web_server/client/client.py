@@ -8,6 +8,13 @@ headers = {
 
 payload = "{\"jsonrpc\": \"2.0\",\"method\": \"say_hello\",\"params\": {\"name\": \"Hyungsuk Kang\"},\"id\":1}"
 
-response = requests.request("POST", url, data=payload, headers=headers)
+json = {
+	"jsonrpc": "2.0",
+	"method": "say_hello",
+        "params": {"name": "Hyungsuk Kang"},
+	"id":1
+}
+
+response = requests.request("POST", url, json=json, headers=headers)
 
 print(response.text)
