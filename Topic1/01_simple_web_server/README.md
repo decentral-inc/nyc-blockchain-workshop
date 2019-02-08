@@ -18,6 +18,11 @@ Blockchain projects using this specification are:
 # Setup
 ========
 
+Update rust with rust version manager `rustup`
+```bash
+rustup update
+```
+
 To setup the project, simply run `cargo new simple_web_server` on the shell.
 
 and setup dependancies like this in `Cargo.toml`.
@@ -29,6 +34,29 @@ jsonrpc-core = "10.0.1"
 jsonrpc-http-server = "10.0.1"
 jsonrpc-derive = "10.0.2"
 
+```
+
+copy and paste the code below to `main.rs`:
+
+```rust
+use jsonrpc_core::*;
+use jsonrpc_http_server::*;
+
+
+fn main() {
+    let mut io = IoHandler::new();
+
+    io.add_method("say_hello", |params: Params| {
+	let parsed: Value = params.parse().unwrap();
+	Ok(Value::String(format!("hello, {}", parsed["name"])))
+    });
+
+    let _server = ServerBuilder::new(io)
+    .start_http(&"127.0.0.1:3030".parse().unwrap())
+    .expect("Unable to start RPC server");
+
+_server.wait();
+}
 ```
 
 then run `cargo build`
