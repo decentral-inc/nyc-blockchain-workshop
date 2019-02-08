@@ -59,25 +59,24 @@ _server.wait();
 }
 ```
 
-then run `cargo build`
+then run  
+  
+```
+cargo build
+```
 
+then while in `/Users/lmeng/Github/decentral/nyc-blockchain-workshop/Topic1/01_simple_web_server`  
 
+```
+./target/debug/simple_web_server
+```
+  
 # Client
 
 Client sends request to RPC server and it is implemented in blockchain and wallets.
 
 It sends two types of params
 
-
-as an array:
-```json
-{
-	"jsonrpc": "2.0",
-	"method": "say_hello",
-	"params": ["world"],
-	"id":1
-}
-```
 
 or as an object:
 ```json
