@@ -1,5 +1,4 @@
 extern crate secp256k1;
-#[cfg(feature="rand")]
 extern crate rand;
 
 

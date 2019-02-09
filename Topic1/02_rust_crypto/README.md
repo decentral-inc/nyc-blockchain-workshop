@@ -35,4 +35,50 @@ for more information on how it works, check out the workshop from Scaling Bitcoi
 
 
 
+# Setup
+========
+
+Update rust with rust version manager `rustup`
+```bash
+rustup update
+```
+
+To setup the project, simply run `cargo new simple_web_server` on the shell.
+
+and setup dependancies like this in `Cargo.toml`.
+
+```toml
+
+[dependencies]
+jsonrpc-core = "10.0.1"
+jsonrpc-http-server = "10.0.1"
+jsonrpc-derive = "10.0.2"
+
+```
+
+copy and paste the code below in main.rs file
+
+```rust
+extern crate secp256k1;
+#[cfg(feature="rand")]
+extern crate rand;
+
+
+use rand::OsRng;
+use secp256k1::{Secp256k1, Message, };
+
+
+fn main() {
+    let secp = Secp256k1::new();
+    let mut rng = OsRng::new().expect("OsRng"); 
+    let (sk1, pk1) = secp.generate_keypair(&mut rng);
+    let message = Message::from_slice(&[0xab; 32]).expect("32 bytes");
+
+    let sig = secp.sign(&message, &sk1);
+    println!("message: {:?}, secret_key: {:?}, public_key:{:?}", message, sk1, pk1); 
+    println!("{}",secp.verify(&message, &sig, &pk1).is_ok());
+}
+```
+
+then run `cargo build`
 
