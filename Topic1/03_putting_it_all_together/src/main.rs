@@ -7,23 +7,26 @@ use t_bang::*;
 mod ecdsa;
 use ecdsa::*;
 
-extern crate rand;
-extern crate secp256k1;
-use rand::OsRng;
-use secp256k1::{Message, Secp256k1, Signature, SecretKey, PublicKey};
-use std::str::FromStr;
-
+mod transaction;
+use transaction::Transaction;
 
 fn main() {
     
     
 
-    let (sk_str, pk_str) = ecdsa::generate();
-    
+    let (bob_sk, bob_pk) = ecdsa::generate();
+    let (alice_sk, alice_pk) = ecdsa::generate();
     println!(
         "secret_key: {:?}, public_key:{:?}",
-        sk_str, pk_str
+        bob_sk, bob_pk
     );
-    let sig_str = sign(&sk_str, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    println!("{}", verify("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", &sig_str, &pk_str));
+    let sig_str = sign(&bob_sk, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    println!("{}", verify("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", &sig_str, &bob_pk));
+    let data = "bob sends alice 5 btc";
+
+    let tx: Transaction = Transaction::new(alice_pk, bob_pk, 5, data.to_string());
+
+    
+    println!("{:?}", tx.defunc_hash().len());
+    
 }
