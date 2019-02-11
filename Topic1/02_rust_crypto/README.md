@@ -37,6 +37,7 @@ for more information on how it works, check out the workshop from Scaling Bitcoi
 ========
 
 If the project cannot be compiled, update rust with rust version manager `rustup`
+
 ```bash
 rustup update
 ```   
@@ -52,3 +53,9 @@ then run the project.
 ```
 cargo run
 ```
+
+afterwards, to run executable  
+
+```bash
+ ./target/debug/rust_crypto
+ ```

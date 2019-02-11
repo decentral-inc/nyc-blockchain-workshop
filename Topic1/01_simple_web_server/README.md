@@ -36,6 +36,12 @@ then run the project.
 cargo run
 ```
 
+afterwards, to run executable  
+
+```bash
+ ./target/debug/rust_crypto
+ ```
+ 
 # Client
 
 Client sends request to RPC server and it is implemented in blockchain and wallets.
