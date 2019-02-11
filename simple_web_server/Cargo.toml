@@ -1,7 +1,0 @@
-[package]
-name = "simple_web_server"
-version = "0.1.0"
-authors = ["Ling Qing Meng <ling.q.meng@gmail.com>"]
-edition = "2018"
-
-[dependencies]
