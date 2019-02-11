@@ -22,3 +22,8 @@ III. Topic 3
 Future implications to the blockchain ecosystem that Rust and WASM brings.
 
 [Projects](./Topic3)
+
+To run this project, make sure the rustc version is set to rustc 1.34.0-nightly. Otherwise, update to the latest version by running 
+```bash
+rustup update
+```

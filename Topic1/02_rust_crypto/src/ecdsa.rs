@@ -71,3 +71,11 @@ pub fn from_hex(hex: &str, target: &mut [u8]) -> Result<usize, ()> {
     Ok(idx / 2)
 }
 
+pub fn sign_raw(sk_str: &str, msg: [u8; 32]) -> String {
+    let secp = Secp256k1::new();
+    let sk = SecretKey::from_str(sk_str).unwrap();
+    let msg = Message::from_slice(&msg[..]).unwrap();
+    let mut sig = secp.sign(&msg, &sk);
+    sig.normalize_s();
+    return sig.to_string();
+}

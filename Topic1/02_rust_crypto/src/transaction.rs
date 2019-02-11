@@ -56,7 +56,7 @@ impl Transaction {
       hash
     }
 
-    pub fn addSignature(&mut self, sig: String) -> &Transaction {
+    pub fn add_signature(&mut self, sig: String) -> &Transaction {
         if(self.signature.to_string() != "") {
             panic!("Already signed tx");
         }
