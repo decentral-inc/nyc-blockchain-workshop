@@ -59,3 +59,40 @@ afterwards, to run executable
 ```bash
  ./target/debug/rust_crypto
  ```
+
+In this project, we have managed bits and bytes for you to easily generate private(secret)/public keys and sha256 hash from struct.
+
+# Usage
+=======
+
+## ecdsa
+
+```rust
+mod ecdsa;
+
+
+let (sk, pk) = ecdsa::generate();
+println!("secret_key: {}, public_key:{}", sk, pk);
+/* prints secret_key: 3397b8b6faba3f83925dcffb51773a28f59530dd3cb6fccf6e3518094040ff70, public_key:022da9ebc229b9436ae89781e12b5787c5e26c3bf555e522b500443df637a9a873 */
+
+let certificate = sign_raw(&sk, txhash);
+println!("{}", certificate);
+/* prints 304402207eaa99cac098aed4cfd7779aae6fd5e547cfaefda81383b83cc4b3a4b01defeb02201b7dc1f51093896301a674a70e0cd037567a65aa3a89066efaf1d64eea7e8d840000 */
+
+```
+
+## transaction
+
+```rust
+
+let data = "Bob sends Alice to 5 eth";
+let mut tx: Transaction = Transaction::new(&alice_pk, &bob_pk, 5, data);
+/* returns Transaction { timestamp: 1549893371, to: "022337a6ba0c0229fb48469bd49745b200f4cdb35459e7033dbd846bee66ee87be", sender: "02a03b99517daf92dd3925eaf02cc5b6e9a90314a70baaa22e7e5383b1580df730", amount: 5, signature: "304402202f8046faf00d945a74c0f42e7e05c7a8360ff4681d57b524c5da79bc2d2058f80220456fe85f731fa07a17361963198c47f2dfd4ee5b6ea9d9932d8a6626ba53d4fe0000", data: "Bob sends Alice to 5 eth" } */
+
+
+let txhash = tx.defunc_hash();
+println!("{:?}", txhash);
+/* prints 32 byte array [97, 47, 223, 9, 131, 127, 59, 167, 82, 210, 232, 206, 47, 113,230, 43, 242, 9, 8, 35, 210, 158, 74, 51, 112, 152, 225, 162, 70, 229, 186, 88] */
+
+```
+

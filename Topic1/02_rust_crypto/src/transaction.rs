@@ -9,25 +9,25 @@ pub type Sha256Hash = [u8; HASH_BYTE_SIZE];
 
 
 #[derive(Debug)]
-pub struct Transaction {
+pub struct Transaction<'a> {
     timestamp: i64,
-    to: String,
-    sender: String,
+    to: &'a str,
+    sender:  &'a str,
     amount: u64,
-    signature: String,
-    data: String,
+    signature:  &'a str,
+    data: &'a str,
 }
 
 
-impl Transaction {
+impl <'a>Transaction<'a> {
     // Creates a new block.
-    pub fn new(_to: String, _sender: String, _amount: u64, _data: String) -> Self {
+    pub fn new(_to:  &'a str, _sender:  &'a str, _amount: u64, _data:  &'a str) -> Self {
         Self {
             timestamp: Utc::now().timestamp(),
             to: _to,
             sender: _sender,
             amount: _amount,
-            signature: "".to_string(),
+            signature: "",
             data: _data,
         }
     }
@@ -36,16 +36,16 @@ impl Transaction {
       let mut vec = Vec::new();
 
       vec.extend(&convert_u64_to_u8_array(self.timestamp as u64));
-      vec.extend_from_slice(&self.to.as_bytes());
-      vec.extend_from_slice(&self.sender.as_bytes());
+      vec.extend_from_slice(self.to.as_bytes());
+      vec.extend_from_slice(self.sender.as_bytes());
       vec.extend(&convert_u64_to_u8_array(self.amount));
-      vec.extend_from_slice(&self.data.as_bytes());
+      vec.extend_from_slice(self.data.as_bytes());
 
       vec
     }
 
     pub fn defunc_hash(&self) -> Sha256Hash {
-      let mut tx:Vec<u8> = self.serialize();
+      let tx:Vec<u8> = self.serialize();
       
       let mut hasher = Sha256::new();
       hasher.input(&tx);
@@ -56,8 +56,8 @@ impl Transaction {
       hash
     }
 
-    pub fn add_signature(&mut self, sig: String) -> &Transaction {
-        if(self.signature.to_string() != "") {
+    pub fn add_signature(&mut self, sig: &'a str) -> &Transaction {
+        if self.signature.to_string() != "".to_string() {
             panic!("Already signed tx");
         }
         self.signature = sig;
