@@ -39,14 +39,19 @@ for more information on how it works, check out the workshop from Scaling Bitcoi
 ========
 
 Update rust with rust version manager `rustup`
+  
 ```bash
 rustup update
 ```
 
 To setup the project, simply run `cargo new simple_web_server` on the shell.
 
-and setup dependancies like this in `Cargo.toml`.
+and setup dependancies like this in `Cargo.toml` with  
 
+```bash
+cargo build
+```
+  
 ```toml
 
 [dependencies]
@@ -55,6 +60,8 @@ jsonrpc-http-server = "10.0.1"
 jsonrpc-derive = "10.0.2"
 
 ```
+
+
 
 copy and paste the code below in main.rs file
 
@@ -80,5 +87,18 @@ fn main() {
 }
 ```
 
-then run `cargo build`
+then compile with while in directory `/nyc-blockchain-workshop/Topic1/02_rust_crypto`      
+  
+```bash
+cargo build
+```
+ 
+
+afterwards, to run executable  
+
+```bash
+ ./target/debug/rust_crypto
+ ```
+
+
 
