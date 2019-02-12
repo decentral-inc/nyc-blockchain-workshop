@@ -79,3 +79,10 @@ pub fn sign_raw(sk_str: &str, msg: [u8; 32]) -> String {
     sig.normalize_s();
     return sig.to_string();
 }
+
+pub fn verify_raw(msg: [u8; 32], sig_str: &str, pk_str: &str) -> bool {
+    let secp = Secp256k1::new();
+    let msg = Message::from_slice(&msg[..]).unwrap();
+    let byte_str = hex!(sig_str);
+    secp.verify(&msg, &Signature::from_der_lax(&byte_str).unwrap(), &PublicKey::from_str(pk_str).unwrap()).is_ok()
+}

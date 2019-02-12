@@ -2,20 +2,22 @@ extern crate crypto;
 use crypto::digest::Digest;
 use crypto::sha2::Sha256;
 use chrono::prelude::*;
+use serde::{Deserialize};
+use jsonrpc_core::*;
 
 const HASH_BYTE_SIZE: usize = 32;
 
 pub type Sha256Hash = [u8; HASH_BYTE_SIZE];
 
 
-#[derive(Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Transaction {
-    timestamp: i64,
-    to: String,
-    sender: String,
-    amount: u64,
-    signature: String,
-    data: String,
+    pub timestamp: i64,
+    pub to: String,
+    pub sender: String,
+    pub amount: u64,
+    pub signature: String,
+    pub data: String,
 }
 
 
@@ -45,7 +47,7 @@ impl Transaction {
     }
 
     pub fn defunc_hash(&self) -> Sha256Hash {
-      let mut tx:Vec<u8> = self.serialize();
+      let tx:Vec<u8> = self.serialize();
       
       let mut hasher = Sha256::new();
       hasher.input(&tx);
