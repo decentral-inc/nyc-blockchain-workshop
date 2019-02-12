@@ -27,7 +27,6 @@ fn main() {
 
     io.add_method("verify_transaction", |params: Params| {
         let parsed: Transaction = params.parse().unwrap();
-        println!("{:?}", parsed);
         let is_self = verify_raw(parsed.defunc_hash(), &parsed.signature, &parsed.sender);
         Ok(Value::String(format!("{}", is_self)))
     });
