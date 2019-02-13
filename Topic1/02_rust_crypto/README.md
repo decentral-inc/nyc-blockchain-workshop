@@ -1,11 +1,11 @@
 # Topic 1-2: ECDSA
-====================
+
 
 This tutorial teaches how ECDSA works and builds ring signatures based on rust bindings of secp256k1 C++ library which is used in Bitcoin.
 
 
 # Asymmetric Cryptography
-=========================
+
 
 Symmetric cryptography is often compared to lock and key as
 
@@ -19,7 +19,6 @@ To overcome this, we apply asymmetric cryptography, which there is one key to on
 Signing key is called private key, and verifying key for decryption is called public key.
 
 # Eliptic Curve Digital Signature Algorithm
-=============================================
 
 Eliptic Curve Digital Signature Algorithm(ECDSA) is one of asymmetric cryptography. ECDSA uses two systems to encrypt the data; eliptic curve and finite field(Galois field). 
 
@@ -34,7 +33,7 @@ for more information on how it works, check out the workshop from Scaling Bitcoi
 
 
 # Setup
-========
+
 
 If the project cannot be compiled, update rust with rust version manager `rustup`
 
@@ -63,7 +62,7 @@ afterwards, to run executable
 In this project, we have managed bits and bytes for you to easily generate private(secret)/public keys and sha256 hash from struct.
 
 # Usage
-=======
+
 
 ## ecdsa
 

@@ -1,11 +1,9 @@
 
 # Topic 1-1: simple_web_server
-=============================    
   
 This tutorial instructs how to build a simple web RPC server and test it with clients, and it uses [JSON-RPC 2.0](https://www.jsonrpc.org/specification) specification to exchange data.
 
 # Why JSON-RPC 2.0?
-=====================   
   
 JSON-RPC is a light-weight remote procedure call (RPC) protocol. Its lightness attracted many blockchain projects to adopt this to their protocol.
 
@@ -17,7 +15,6 @@ Blockchain projects using this specification are:
 ...and many more
 
 # Setup
-========
 
 If the project cannot be compiled, update rust with rust version manager `rustup`
 ```bash
@@ -41,7 +38,7 @@ afterwards, to run executable
 ```bash
  ./target/debug/rust_crypto
  ```
- 
+
 # Client
 
 Client sends request to RPC server and it is implemented in blockchain and wallets.
