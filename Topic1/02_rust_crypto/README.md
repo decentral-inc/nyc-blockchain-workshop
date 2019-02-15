@@ -74,8 +74,8 @@ let (sk, pk) = ecdsa::generate();
 println!("secret_key: {}, public_key:{}", sk, pk);
 /* prints secret_key: 3397b8b6faba3f83925dcffb51773a28f59530dd3cb6fccf6e3518094040ff70, public_key:022da9ebc229b9436ae89781e12b5787c5e26c3bf555e522b500443df637a9a873 */
 
-let certificate = sign_raw(&sk, txhash);
-println!("{}", certificate);
+let signature = sign_raw(&sk, txhash);
+println!("{}", signature);
 /* prints 304402207eaa99cac098aed4cfd7779aae6fd5e547cfaefda81383b83cc4b3a4b01defeb02201b7dc1f51093896301a674a70e0cd037567a65aa3a89066efaf1d64eea7e8d840000 */
 
 ```

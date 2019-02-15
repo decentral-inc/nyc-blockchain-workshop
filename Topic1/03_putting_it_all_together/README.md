@@ -59,3 +59,16 @@ curl -X POST \
 # Client
 
 A python client is located in the [client folder](./client/).
+
+To run the client, install request package from pip and locate to the client folder.
+```bash
+pip install request
+cd ./client/
+```
+
+and run the python code.
+```bash
+python client.py
+# should print "true"
+
+```

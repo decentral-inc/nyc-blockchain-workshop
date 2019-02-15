@@ -1,6 +1,7 @@
 extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
+mod ecdsa;
 
 #[wasm_bindgen]
 extern {
@@ -9,5 +10,6 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
-    alert(&format!("Hello, {}!", name));
+    let (sk, pk) = ecdsa::generate();
+    alert(&format!("Hello, {}!", sk));
 }
