@@ -35,11 +35,11 @@ impl <'a>Transaction<'a> {
     pub fn new(to:  &'a str, sender:  &'a str, amount: u64, data:  &'a str) -> Self {
         Self {
             timestamp: Utc::now().timestamp(),
-            to: _to,
-            sender: _sender,
-            amount: _amount,
+            to: to,
+            sender: sender,
+            amount: amount,
             signature: "",
-            data: _data,
+            data: data,
         }
     }
 

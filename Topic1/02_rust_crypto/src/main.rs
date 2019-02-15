@@ -22,7 +22,7 @@ fn main() {
     let mut tx: Transaction = Transaction::new(&alice_pk, &bob_pk, 5, data);
 
     // make hash out of transaction to represent it
-    let txhash = tx.defunc_hash();
+    let txhash = tx.hash();
 
     // Generate signature by signing txhash
     let signature = sign_raw(&bob_sk, txhash);

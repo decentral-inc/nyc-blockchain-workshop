@@ -53,6 +53,7 @@ extern create wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 // Wrapper interface
+#[wasm_bindgen]
 extern {
     fn alert(s: &str);
 }
@@ -64,7 +65,7 @@ With wasm-bindgen, you can also export rust code with javascript functions.
 ```rust
 #[wasm_bindgen]
 pub fn hello_world(name: &str) {
-    alert(&fromat!("Hello, {}!", name));
+    alert(&format!("Hello, {}!", name));
 }
 ```
 
