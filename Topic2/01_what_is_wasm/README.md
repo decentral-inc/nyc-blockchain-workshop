@@ -10,7 +10,7 @@ Rust is one of them but has more advantages than other languages with its memory
 
 To witness the power of WebAssembly in rust, check out 
 
-[awesome-wasm](https://github.com/rustwasm/awesome-rust-and-webassembly)
+[https://github.com/rustwasm/awesome-rust-and-webassembly](https://github.com/rustwasm/awesome-rust-and-webassembly)
 
 # How to use wasm in rust
 
@@ -83,7 +83,7 @@ cd pkg/
 npm publish --access=public
 ```
 
-
+### Reference
 
 
 
