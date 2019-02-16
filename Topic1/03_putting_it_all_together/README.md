@@ -64,7 +64,16 @@ curl -X POST \
 
 # Client
 
-A python client is located in the [client folder](./client/). Ready to use (no need to modify it).  
+Check to see if you have python3 installed: 
+
+```bash
+python -v
+```
+
+should return `Python 3.7.2 (v3.7.2:9a3ffc0492, Dec 24 2018, 02:44:43) `  
+
+
+A python client is located in the [client folder](./client/). It's ready to use (no need to modify it) for this demo.  
 It will be our means of interacting with our rust server.   
 
 To run the client, install request package from pip and locate to the client folder. 
@@ -74,6 +83,12 @@ pip install request
 cd ./client/
 ```
 (note your local path may be different)    
+
+Depending on your machine:   
+```bash
+pip3 install request
+cd ./client/
+```
   
   
 and run the python code.

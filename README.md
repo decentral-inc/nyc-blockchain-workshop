@@ -39,7 +39,7 @@ python client.py
 
 for Topic 1, 
 
-### Take a look of how ECDSA works in  
+### Take a look of how ECDSA works 
 
 ### Build a simple web authentication server with jsonrpc and secp256k1
 

@@ -27,7 +27,7 @@ cd ./Topic1/01_simple_web_server/
 cargo build
 ```
 
-then run the project.
+then run the project module  
   
 ```
 cargo run
@@ -71,7 +71,9 @@ For tutorial we will use Postman, but you can also test your server with the cli
 ![postman setting2](https://i.imgur.com/qvXnAtA.png)
 
 
-Press send button and you have now finished a RPC-JSON server development!
+Press the **Send** button on postman
+Once it sends out the JSON RPC request and see the response   
+You will have then finished the JSON-RPC server development part of this tutorial!  
 
 
 
