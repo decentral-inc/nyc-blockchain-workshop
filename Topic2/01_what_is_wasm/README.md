@@ -2,7 +2,7 @@
 
 ![webassembly](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Web_Assembly_Logo.svg/1200px-Web_Assembly_Logo.svg.png)
 
-WebAssembly is a new assembly language close to metal which is shared all types of major browsers. 
+WebAssembly is a new assembly language close that's lower level (think Assembly) and executeable all types of major browsers. WebAssembly is designed to maintain the versionless, feature-tested, and backwards-compatible nature of the web.   
 
 It started as an upgrade to javascript, which is the only programming language on the web browser to be compiled on native level. However, all programming languages now try to support it to be compiled in the assembly language so that they can be compiled to the web without using javascript.
 

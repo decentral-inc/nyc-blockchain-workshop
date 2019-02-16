@@ -4,13 +4,14 @@ In this topic, we will build a transaction authentication/authorization server w
 
 # API endpoints
 
-The authentication server has only one endpoint which verifies transaction.
+## verify_transaction
+The authentication server has only one endpoint which verifies the transaction.  
+  
+- verify_transaction  
+  
+Returns whether transaction is valid or not with boolean value.  
 
-- verify_transaction
 
-### verify_transaction
-
-Returns whether transaction is valid or not with boolean value.
 
 ### Parameters
 
@@ -58,7 +59,7 @@ curl -X POST \
 
 # Client
 
-A python client is located in the [client folder](./client/).
+A python client is located in the [client folder](./client/). It will be our means of interacting with our rust server. 
 
 To run the client, install request package from pip and locate to the client folder.
 ```bash
