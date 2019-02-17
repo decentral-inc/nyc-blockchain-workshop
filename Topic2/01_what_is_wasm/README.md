@@ -21,7 +21,7 @@ In this topic, we will make node package with wasm.
 rustup default nightly
 ```
 
-- Start new rust project with `Cargo new wasm-tutorial`
+- Start new rust project with `Cargo new wasm-tutorial --lib`
 
 - Set Cargo.toml as below:
 ```toml
