@@ -21,6 +21,12 @@ In this topic, we will make node package with wasm.
 rustup default nightly
 ```
 
+- Setup wasm-pack
+```bash
+cargo install cargo-generate
+cargo generate --git https://github.com/rustwasm/wasm-pack-template
+```
+
 - Start new rust project with `Cargo new wasm-tutorial`
 
 - Set Cargo.toml as below:
