@@ -63,7 +63,7 @@ To reset the blockchain protocol on development process(only) for significant up
 
 On Substrate, wasm is used for building logics in the blockchain, which means pure native code is developed with rust instead of applying EVM and its domain specific language(e.g. solidity, vyper). This also means it also supports other programming languages as long as it can be compiled to wasm. Go is preparing its implementation from Chainsafe🚀🚀🚀. Let us learn wasm for now with rust. What's more, Substrate introduces runtime processed in faster rate than ethereum smart contract.
 
-### Runtime vs. Smart contract
+### Runtime & Module vs. Smart contract
 
 Smart contract is a ethereum byte opcodes stored in key-value database(e.g. BoltsDB for Eth2.0 by Prysmatic lab). Here is the execution process for smart contract.
 
@@ -72,14 +72,23 @@ Smart contract is a ethereum byte opcodes stored in key-value database(e.g. Bolt
 3. VM in ethereum node processes execution from the input from transaction to the stored ethereum byte code
 4. result is applied to state and state root is added to the block.
 
-On the other hand, Runtime in substrate is a built-in "state transition function"(STF), which directly changes the state of the blockchain. On ethereum there was one STF, `apply_transaction`. Polkadot network approach scalability problem with modular blockchain where each service providers separate their services with their own blockchain. As a result, it enables optimized state transition for a blockchain and connected same time, strengthening its integrity by joining mining power between blockchain protocols. Here is the execution process for runtime module.
+On the other hand, Runtime is a built-in "state transition function"(STF), which directly changes the state of the blockchain. On ethereum there was one STF, `apply_transaction`. Without going through EVM, transactions can be processed with much less computational overhead. They do not go through metering for its opcodes, so only arguments for the runtime endpoints are required on JSON-RPC call, downsizing the request data significantly. Here is the execution process for runtime module.
 
 1. User sends encrypted transaction to a Substrate node to its runtime endpoint
 2. Substrate node verifies tx and processes built-in function and change state if the tx requests for change
 3. State root is added to the block to record the change
 
-### Creating a module
+Modules are compared to built-in functions in Ethereum smart contract(e.g. keccak256, ecrecover). They provide features and STFs in modular way to operate Substrate blockchain such as:
 
+- Account Management
+- Token Balances
+- Governances
+- Runtime Upgrades
+- and more to be added with open source contribution
+
+### Creating a new module
+
+We will build our own blockchain function 
 to start with, let us locate to `runtime/` in substrate folder.
 
 ```rust
@@ -99,6 +108,8 @@ decl_module! {
     }
 }
 ```
+
+
 
 
 ### Reference

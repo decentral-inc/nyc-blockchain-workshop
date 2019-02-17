@@ -25,6 +25,9 @@ rustup default nightly
 
 - Set Cargo.toml as below:
 ```toml
+[features]
+default = ["console_error_panic_hook"]
+
 [package]
 name = "wasm-tutorial"
 version = "0.1.0"
@@ -37,7 +40,21 @@ crate-type = ["cdylib"] // only static library is supported on wasm for now
 
 
 [dependencies]
-wasm-bindgen="0.2"
+cfg-if = "0.1.2"
+wasm-bindgen = "=0.2.34" # this version only supports webpack currently(02/15/19)
+
+# The `console_error_panic_hook` crate provides better debugging of panics by
+# logging them with `console.error`. This is great for development, but requires
+# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
+# code size when deploying.
+console_error_panic_hook = { version = "0.1.1", optional = true }
+
+# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
+# compared to the default allocator's ~10K. It is slower than the default
+# allocator, however.
+#
+# Unfortunately, `wee_alloc` requires nightly Rust when targeting wasm for now.
+wee_alloc = { version = "0.4.2", optional = true }
 ```
 
 
@@ -61,7 +78,7 @@ extern {
 
 ### Producing Rust functions that Javascript can call
 
-With wasm-bindgen, you can also export rust code with javascript functions. Only rust code is supported to be compiled into wasm, which means rust wrapper is not available. 
+With wasm-bindgen, you can also export rust code with javascript functions. Only pure rust code is supported to be compiled into wasm, which means rust wrapper library is not available to export to js. 
 ```rust
 #[wasm_bindgen]
 pub fn hello_world(name: &str) {
@@ -108,11 +125,17 @@ wasm.greet("world");
 
 ```
 
+# Fibonacci in rust 
+
+This package implements fibonacci in wasm.
+
+To run it, go to `site` directory and run server
+```bash
+npm install 
+npm start
+```
 
 
-
-
-### Reference
 
 
 
