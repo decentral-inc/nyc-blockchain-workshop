@@ -61,7 +61,7 @@ extern {
 
 ### Producing Rust functions that Javascript can call
 
-With wasm-bindgen, you can also export rust code with javascript functions.
+With wasm-bindgen, you can also export rust code with javascript functions. Only rust code is supported to be compiled into wasm, which means rust wrapper is not available. 
 ```rust
 #[wasm_bindgen]
 pub fn hello_world(name: &str) {
@@ -71,17 +71,46 @@ pub fn hello_world(name: &str) {
 
 ## Building wasm into node package that can be published
 
+To publish a node.js package, let us register an account to npm.
+```bash
+npm adduser your_npm_username
+```
+
 Now javascript is a compiled language with the wasm. build the package by running this command.
 ```bash
-wasm-pack build 
+wasm-pack build --scope your_npm_username
 ```
 
-Then go to pkg folder and you can use npm commands for this.
+Then run command
 ```bash
-cd pkg/
-
-npm publish --access=public
+wasm-pack publish --access=public
 ```
+
+## Use node package in node.js apps
+
+Start with boiler plate
+
+```bash
+npm init wasm-app
+```
+
+then install published pacakge 
+
+```
+npm install @your_npm_username/your_package_name
+```
+
+then import it in js files
+```
+import * as wasm from "@your_npm_username/your_package_name;
+
+wasm.greet("world");
+
+```
+
+
+
+
 
 
 
