@@ -33,7 +33,7 @@ cargo build
 cargo new wasm-tutorial
 ```
 
-- Set Cargo.toml as below:  
+- Example TOML file, however we won't be using this
 
 ```toml
 [package]
@@ -52,6 +52,24 @@ wasm-bindgen="0.2"
 ```   
 
 This file above is the `lib.rs` built after making cargo lib project located in `./nyc-blockchain-workshop/Topic2/01_what_is_wasm/wasm-tutorial/src/lib.rs`  
+
+
+```bash
+cd wasm-tutorial
+cargo build
+cargo run
+```
+
+Should see  
+  
+```
+Lings-MBP:wasm-tutorial lmeng$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/wasm-tutorial`
+Hello, world!
+```
+
+
    
 
 
@@ -85,21 +103,29 @@ pub fn hello_world(name: &str) {
 
 ## Building wasm into node package that can be published
 
+Ensure you have `wasm-pack` installed  
+  
+```bash
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+```
+
+
 To publish a node.js package, let us register an account to npm.
 ```bash
 npm adduser your_npm_username
 ```
+
+If you have an NPM account already, use the username and email associated with that. Otherwise just register for a new one. Please remember your password.   
+  
 
 Now javascript is a compiled language with the wasm. build the package by running this command.
 ```bash
 wasm-pack build --scope your_npm_username
 ```
 
-Ensure you have `wasm-pack` installed  
-  
-```bash
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-```
+IMPORTANT: Before you can publish, you must verify your email.   
+
+In Chrome go to [https://www.npmjs.com/](https://www.npmjs.com/)  and hit login, and login with the credentials you just made. 
 
 Then run command
 ```bash
@@ -114,13 +140,28 @@ Start with boiler plate
 npm init wasm-app
 ```
 
-then install published pacakge 
+then install published pacakge, ensure there is `@` appended to the left of your username in cmd below  
 
 ```
 npm install @your_npm_username/your_package_name
 ```
 
-then import it in js files
+Result of success should look like  
+
+```
+Lings-MBP:wasm-tutorial lmeng$ npm install @lingqingmeng/wasm-tutorial
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN wasm-app@1.0.0 No description
+npm WARN wasm-app@1.0.0 No repository field.
+
++ @lingqingmeng/wasm-tutorial@0.1.0
+added 1 package and audited 1 package in 1.574s
+found 0 vulnerabilities
+```
+   
+
+then import it in js files  
+
 ```
 import * as wasm from "@your_npm_username/your_package_name;
 
