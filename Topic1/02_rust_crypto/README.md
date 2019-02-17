@@ -40,6 +40,13 @@ If the project cannot be compiled, update rust with rust version manager `rustup
 ```bash
 rustup update
 ```   
+
+Set it up to use nightly by default  
+  
+```bash
+rustup default nightly
+```
+  
   
 Navigate to the directory of this project from the cloned repository on terminal and build the project
 ```bash
