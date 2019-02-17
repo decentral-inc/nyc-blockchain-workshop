@@ -16,14 +16,25 @@ To witness the power of WebAssembly in rust, check out
 
 In this topic, we will make node package with wasm.
 
-- Set nightly version as default
+- Set nightly version as default  
+
 ```bash
 rustup default nightly
 ```
 
-- Start new rust project with `Cargo new wasm-tutorial`
+```bash
+cargo build
+```   
+    
 
-- Set Cargo.toml as below:
+- Start new rust project with    
+  
+```bash
+cargo new wasm-tutorial
+```
+
+- Set Cargo.toml as below:  
+
 ```toml
 [package]
 name = "wasm-tutorial"
@@ -38,7 +49,10 @@ crate-type = ["cdylib"] // only static library is supported on wasm for now
 
 [dependencies]
 wasm-bindgen="0.2"
-```
+```   
+
+This file above is the `lib.rs` built after making cargo lib project located in `./nyc-blockchain-workshop/Topic2/01_what_is_wasm/wasm-tutorial/src/lib.rs`  
+   
 
 
 ## Bind wasm code to javascript
@@ -79,6 +93,12 @@ npm adduser your_npm_username
 Now javascript is a compiled language with the wasm. build the package by running this command.
 ```bash
 wasm-pack build --scope your_npm_username
+```
+
+Ensure you have `wasm-pack` installed  
+  
+```bash
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 ```
 
 Then run command
