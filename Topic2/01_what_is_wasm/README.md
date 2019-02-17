@@ -46,7 +46,7 @@ wasm-bindgen="0.2"
 
 ### Building Javascript wrapper interface 
 
-To enable the functions created from the rust on browser, we need to build a wrapper interface to be run on js file. You can think of this as *importing javascript function to rust file*.
+To enable the functions created from the rust on browser, we need to build a wrapper interface to be run on js file. You can think of this as *importing javascript function to rust file*. In `lib.rs` file,
 
 ```rust
 extern create wasm_bindgen;
