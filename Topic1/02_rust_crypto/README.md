@@ -49,7 +49,7 @@ cargo build
 
 then run the project.
   
-```
+```bash
 cargo run
 ```
 
@@ -60,6 +60,18 @@ afterwards, to run executable
  ```
 
 In this project, we have managed bits and bytes for you to easily generate private(secret)/public keys and sha256 hash from struct.
+
+> A tuple struct  
+```
+struct Pair(i32, f32);
+```
+> A struct with two fields  
+```
+struct Point {
+    x: f32,
+    y: f32,
+}
+```
 
 # Usage
 

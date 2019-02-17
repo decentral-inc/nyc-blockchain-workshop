@@ -1,16 +1,22 @@
-# Topic 1-3: putting_it_all_together
+# Topic 1
 
-In this topic, we will build a transaction authentication/authorization server with ECDSA and json-rpc 2.0. We already built interfaces from [Topic 1-2](../rust-crypto) for you to avoid going through bits and bytes so don't worry.
+## Section 03: Putting it all together
+
+In this section of the seminar, we will build a transaction authentication/authorization server with ECDSA and json-rpc 2.0. We already built interfaces from [Section 02](../rust-crypto) so all you have to do is piece it together
 
 # API endpoints
 
-The authentication server has only one endpoint which verifies transaction.
+## verify_transaction
 
-- verify_transaction
+The authentication server has only one endpoint which verifies the transaction.   
+  
+```  
+method: verify_transaction
+Returns: whether transaction is valid or not with boolean value
+```
 
-### verify_transaction
+See **Example Request** below
 
-Returns whether transaction is valid or not with boolean value.
 
 ### Parameters
 
@@ -31,7 +37,7 @@ Returns whether transaction is valid or not with boolean value.
 `bool` - whether the transaction is valid(true) or not(false)
 
 
-### Example
+### Example Request
 
 ```bash
 // Request
@@ -58,14 +64,33 @@ curl -X POST \
 
 # Client
 
-A python client is located in the [client folder](./client/).
+Check to see if you have python3 installed: 
 
-To run the client, install request package from pip and locate to the client folder.
+```bash
+python -v
+```
+
+should return `Python 3.7.2 (v3.7.2:9a3ffc0492, Dec 24 2018, 02:44:43) `  
+
+
+A python client is located in the [client folder](./client/). It's ready to use (no need to modify it) for this demo.  
+It will be our means of interacting with our rust server.   
+
+To run the client, install request package from pip and locate to the client folder. 
+Should be in directory `nyc-blockchain-workshop/Topic1/03_putting_it_all_together/client`  
 ```bash
 pip install request
 cd ./client/
 ```
+(note your local path may be different)    
 
+Depending on your machine:   
+```bash
+pip3 install request
+cd ./client/
+```
+  
+  
 and run the python code.
 ```bash
 python client.py
