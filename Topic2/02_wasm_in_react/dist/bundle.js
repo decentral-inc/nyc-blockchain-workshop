@@ -52,13 +52,9 @@
 /******/ 	function promiseResolve() { return Promise.resolve(); }
 /******/
 /******/ 	var wasmImportObjects = {
-/******/ 		"./build/react_rust_wasm_bg.wasm": function() {
+/******/ 		"./node_modules/wasm-loader/index.js!./build/react_rust_wasm_bg.wasm": function() {
 /******/ 			return {
-/******/ 				"./react_rust_wasm": {
-/******/ 					"__wbg_alert_42c5391edfd46cdc": function(p0i32,p1i32) {
-/******/ 						return installedModules["./build/react_rust_wasm.js"].exports["__wbg_alert_42c5391edfd46cdc"](p0i32,p1i32);
-/******/ 					}
-/******/ 				}
+/******/
 /******/ 			};
 /******/ 		},
 /******/ 	};
@@ -146,7 +142,7 @@
 /******/
 /******/ 		// Fetch + compile chunk loading for webassembly
 /******/
-/******/ 		var wasmModules = {"1":["./build/react_rust_wasm_bg.wasm"]}[chunkId] || [];
+/******/ 		var wasmModules = {"0":["./node_modules/wasm-loader/index.js!./build/react_rust_wasm_bg.wasm"]}[chunkId] || [];
 /******/
 /******/ 		wasmModules.forEach(function(wasmModuleId) {
 /******/ 			var installedWasmModuleData = installedWasmModules[wasmModuleId];
@@ -156,7 +152,7 @@
 /******/ 				promises.push(installedWasmModuleData);
 /******/ 			else {
 /******/ 				var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 				var req = fetch(__webpack_require__.p + "" + {"./build/react_rust_wasm_bg.wasm":"c050c1b178fff737c2c6"}[wasmModuleId] + ".module.wasm");
+/******/ 				var req = fetch(__webpack_require__.p + "" + {"./node_modules/wasm-loader/index.js!./build/react_rust_wasm_bg.wasm":"31f6893f38a5927273c3"}[wasmModuleId] + ".module.wasm");
 /******/ 				var promise;
 /******/ 				if(importObject instanceof Promise && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 					promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {
@@ -401,7 +397,7 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar wasm = Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../build/react_rust_wasm_bg */ \"./build/react_rust_wasm_bg.wasm\"));\n\nwasm.then(function (wasm) {\n  var App = function App() {\n    return _react2.default.createElement(\n      \"div\",\n      null,\n      _react2.default.createElement(\n        \"h1\",\n        null,\n        \"Hi there\"\n      ),\n      _react2.default.createElement(\n        \"button\",\n        { onClick: wasm.big_computation },\n        \"Run Computation\"\n      )\n    );\n  };\n\n  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById(\"root\"));\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n//import * as wasm from \"@hskang9/wasm-tutorial\"\nvar wasm = __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! wasm-loader!../build/react_rust_wasm_bg */ \"./node_modules/wasm-loader/index.js!./build/react_rust_wasm_bg.wasm\", 7));\n\nwasm.then(function (wasm) {\n  var App = function App() {\n    return _react2.default.createElement(\n      \"div\",\n      null,\n      _react2.default.createElement(\n        \"h1\",\n        null,\n        \"Hi there\"\n      ),\n      _react2.default.createElement(\"input\", null),\n      _react2.default.createElement(\n        \"button\",\n        { onClick: wasm.fibonacci(144) },\n        \"Run Computation\"\n      )\n    );\n  };\n\n  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById(\"root\"));\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

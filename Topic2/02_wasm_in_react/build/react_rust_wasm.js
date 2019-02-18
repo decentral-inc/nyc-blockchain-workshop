@@ -22,9 +22,14 @@ export function __wbg_alert_42c5391edfd46cdc(arg0, arg1) {
     alert(varg0);
 }
 /**
+* @param {number} arg0
 * @returns {void}
 */
-export function big_computation() {
-    return wasm.big_computation();
+export function fibonacci(arg0) {
+    return wasm.fibonacci(arg0);
+}
+
+export function __wbindgen_throw(ptr, len) {
+    throw new Error(getStringFromWasm(ptr, len));
 }
 
