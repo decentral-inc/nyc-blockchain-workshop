@@ -1,23 +1,28 @@
-extern crate rand;
-extern crate secp256k1;
-use rand::OsRng;
-use secp256k1::{Secp256k1};
 extern crate wasm_bindgen;
-
-
 
 use wasm_bindgen::prelude::*;
 
+
 #[wasm_bindgen]
 extern "C" {
-    fn alert(s: &str);
+    pub fn alert(s: &str);
 }
 
 #[wasm_bindgen]
-pub fn big_computation() {
-    let a = 1;
-    let b = 1;
-    alert(&format!("{} + {} = {}", a,b, a+b));
+pub fn fibonacci(n: i32) {
+    alert(&format!("fibonacci sequence of n is {}", fibonacci_recursive(n)));
+}
+
+fn fibonacci_recursive(n: i32) -> u64 {
+    if n < 0 {
+        panic!("negative number {} is not accepted", n);
+    }
+    match n {
+        0 => panic!("zero is not accepted"),
+        1 | 2 => 1,
+        3 => 2,
+        _ => fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
+    }
 }
 
 

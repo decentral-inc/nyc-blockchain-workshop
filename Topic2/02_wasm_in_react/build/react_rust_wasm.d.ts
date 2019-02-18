@@ -1,2 +1,2 @@
 /* tslint:disable */
-export function big_computation(): void;
+export function fibonacci(arg0: number): void;

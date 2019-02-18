@@ -1,5 +1,7 @@
 # Topic 2-3. wasm in substrate
 
+On topic 2-3, we will build a simple game with blockchain in 30 mins using substrate.
+
 # Substrate
 
 Substrate is a blockchain platform for innovators who wants to innovate social infrastructure of his or her community. It is also a building block of Polkadot network, the internet of blockchains.
@@ -92,22 +94,51 @@ We will build our own blockchain function
 to start with, let us locate to `runtime/` in substrate folder.
 
 ```rust
+use {balances, system::{self, ensure_signed}};
 use support::{decl_storage, decl_module};
 
-pub trait Trait: system::Trait {}
+pub trait Trait: balances::Trait {}
 
 decl_stroge! {
-    trait Store for Module<T: Trait> as KittyStorage {
+    trait Store for Module<T: Trait> as Storage {
         // Declare storage and getter function here
+        Trial: u64;
+        Pot: u64;
     }
 }
 
 decl_module! {
-    pub struc Module<T: Trait> for enum Call where origin: T::Origin {
-        // Declare public functions here
+    pub struct Module<T: Trait> for enum Call where origin: T::Origin {
+        fn play(origin) -> Result {
+            let sender = ensure_signed(origin)?;
+
+            let payment = Self::payment().ok_or("Must have payment amount set");
+
+            <balances::Module<T>>::decrease_free_balance(&sender, payment)?;
+
+
+            if(<Trial<T>>::get() == 42) {
+                <Trial<T>>::put(0);
+                <balances::Module<T>>::increase_free_balance_creating(&sender, <Pot<T>>::take());
+            }
+
+            if(<system::Module<T>>::random_seed(), &sender).using_encoded(<T as system::Trait>::Hashing::hash).using_encoded(|e| e[0] < 128)
+            {
+               <balances::Module<T>>::increase_free_balance_creating(&sender, <Pot<T>>::take()); 
+            }
+
+            <Pot<T>>::mutate(|pot| *pot += payment);            
+        }
+
+        
     }
 }
 ```
+`decl_storage!` is where you define the data to store. In this tutorial we store a number to count number of trials.
+
+`decl_module` is where you declare functions for operating substrate.
+
+
 
 
 
