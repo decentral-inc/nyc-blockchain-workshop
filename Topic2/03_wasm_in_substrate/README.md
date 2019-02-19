@@ -99,11 +99,28 @@ goto file `tutorial.rs` and `lib.rs` and code as written there.
 
 ## Interacting with Substrate 
 
+### Polkadot explorer
+
+Polkadot network has prepared a tool to test your runtime functions on web browser.
+
 Go to settings on [polkadot explorer](https://polkadot.js.org/apps/#/settings) and configure it to face local node
 
 Then go to Extrinsic menu and interact with it.
 ![menu for extrinsic](https://i.imgur.com/pdPSIvd.png)
 
+### Substrate UI
+
+Substrate UI is where you build Custom UI to interact with Substate. It is built with React with Semactic UI css framework.
+
+This can be used to make dapp on browser.
+
+to make a new fronend app, simply run command
+
+```bash
+substrate-ui new <dapp name>
+cd <dapp name>
+yarn install
+```
 
 
 ### Reference
