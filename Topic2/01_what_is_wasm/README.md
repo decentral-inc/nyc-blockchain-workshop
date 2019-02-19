@@ -105,7 +105,7 @@ wasm-pack publish --access=public
 
 ## Use node package in node.js apps
 
-Start with boiler plate
+Start with boiler plate, by installing `wasm-app` via CLI, which is this code generator [https://github.com/rustwasm/create-wasm-app](https://github.com/rustwasm/create-wasm-app)
 
 ```bash
 npm init wasm-app
@@ -119,7 +119,7 @@ npm install @your_npm_username/your_package_name
 
 then import it in js files
 ```
-import * as wasm from "@your_npm_username/your_package_name;
+import * as wasm from "@your_npm_username/your_package_name";
 
 wasm.greet("world");
 
@@ -127,13 +127,35 @@ wasm.greet("world");
 
 # Fibonacci in rust 
 
-This package implements fibonacci in wasm.
+This package implements fibonacci in wasm. You should be in the dir `/nyc-blockchain-workshop/Topic2/01_what_is_wasm`
+  
 
-To run it, go to `site` directory and run server
-```bash
-npm install 
+```
+cargo new wasm-fib --lib
+cd wasm-fib
+npm adduser lingqingmeng
+cat src/lib.rs
+```
+  
+Replace with lib.rs in parent directory’s src folder  
+
+```
+cargo build
+wasm-pack build --scope your_npm_username
+wasm-pack publish --access=public
+cd ../site/
+npm i @your_npm_username/wasm-fib --save
+```
+  
+Add in lines to index.js again, put in a variety of fib numbers   
+
+```
 npm start
 ```
+
+In Chrome navigate to localhost:8080
+
+
 
 
 
