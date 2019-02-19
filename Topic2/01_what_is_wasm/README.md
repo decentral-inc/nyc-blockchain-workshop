@@ -1,6 +1,6 @@
 # Topic 2-1. What is WebAssembly(WASM)?
 
-![webassembly](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Web_Assembly_Logo.svg/1200px-Web_Assembly_Logo.svg.png)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Web_Assembly_Logo.svg/1200px-Web_Assembly_Logo.svg.png" width="200" height="200"/>
 
 WebAssembly is a new assembly language close that's lower level (think Assembly) and executeable all types of major browsers. WebAssembly is designed to maintain the versionless, feature-tested, and backwards-compatible nature of the web.   
 
