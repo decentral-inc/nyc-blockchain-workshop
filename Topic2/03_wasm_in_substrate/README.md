@@ -94,51 +94,110 @@ We will build our own blockchain function
 to start with, let us locate to `runtime/` in substrate folder.
 
 ```rust
+use support::{decl_storage, decl_module, StorageValue, dispatch::Result, decl_event};
 use {balances, system::{self, ensure_signed}};
-use support::{decl_storage, decl_module};
+use runtime_primitives::traits::Hash;
+use parity_codec::Encode;
 
-pub trait Trait: balances::Trait {}
 
-decl_stroge! {
+pub trait Trait: balances::Trait {
+    type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
+}
+
+
+decl_storage! {
     trait Store for Module<T: Trait> as Storage {
         // Declare storage and getter function here
-        Trial: u64;
-        Pot: u64;
+        Trial get(get_trial): u64;
+        Payment get(payment): Option<T::Balance>;
+        Pot get(pot): T::Balance;
     }
 }
 
+
+
+decl_event!(
+    pub enum Event<T>
+    where
+        <T as balances::Trait>::Balance
+    {
+        Win(Balance),
+        Deposit(Balance),
+        Trial(u64),
+        Payment(Balance),
+    }
+);
+
 decl_module! {
     pub struct Module<T: Trait> for enum Call where origin: T::Origin {
+
+        fn deposit_event<T>() = default;
+
+
         fn play(origin) -> Result {
             let sender = ensure_signed(origin)?;
 
-            let payment = Self::payment().ok_or("Must have payment amount set");
+            let payment = Self::payment().ok_or("Must have payment amount set")?;
 
             <balances::Module<T>>::decrease_free_balance(&sender, payment)?;
 
 
-            if(<Trial<T>>::get() == 42) {
-                <Trial<T>>::put(0);
+            if <Trial<T>>::get() == 42  {
+                <Trial<T>>::mutate(|trial| *trial = 0);
+                Self::deposit_event(RawEvent::Win(<Pot<T>>::get()));
                 <balances::Module<T>>::increase_free_balance_creating(&sender, <Pot<T>>::take());
             }
 
             if(<system::Module<T>>::random_seed(), &sender).using_encoded(<T as system::Trait>::Hashing::hash).using_encoded(|e| e[0] < 128)
             {
+               Selfknpm ::deposit_event(RawEvent::Win(<Pot<T>>::get()));
+
                <balances::Module<T>>::increase_free_balance_creating(&sender, <Pot<T>>::take()); 
             }
 
-            <Pot<T>>::mutate(|pot| *pot += payment);            
-        }
+            <Pot<T>>::mutate(|pot| *pot += payment);    
+            <Trial<T>>::mutate(|trial| *trial += 1);
+            Self::deposit_event(RawEvent::Deposit(payment));
+            
+            Ok(())        
+        } 
 
-        
+        fn set_payment(_origin, value: T::Balance) -> Result {
+            <Trial<T>>::put(0);
+            let trial = 0;
+            Self::deposit_event(RawEvent::Trial(trial));
+  
+            //If the payment has not been set...
+            if Self::payment().is_none() {
+            // ... we will set it to the value we passed in.
+            <Payment<T>>::put(value);
+    
+            // We will also put that initial value into the pot for someone to win
+            <Pot<T>>::put(value);
+            }  
+
+            Self::deposit_event(RawEvent::Payment(value));
+  
+            Ok(())
+        }       
     }
 }
 ```
+
 `decl_storage!` is where you define the data to store. In this tutorial we store a number to count number of trials.
 
 `decl_module` is where you declare functions for operating substrate.
 
+`decl_event` is where you declare events to subsribe changes in blockchain state.
 
+
+
+
+## Interacting with Substrate 
+
+Go to settings on [polkadot explorer](https://polkadot.js.org/apps/#/settings) and configure it to face local node
+
+Then go to Extrinsic menu and interact with it.
 
 
 
