@@ -117,8 +117,8 @@ This can be used to make dapp on browser.
 to make a new fronend app, simply run command
 
 ```bash
-substrate-ui new <dapp name>
-cd <dapp name>
+substrate-ui-new <substrate project>
+cd <substrateproject>-ui
 yarn install
 ```
 To run the web app,
