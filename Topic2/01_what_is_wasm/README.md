@@ -66,7 +66,7 @@ wee_alloc = { version = "0.4.2", optional = true }
 To enable the functions created from the rust on browser, we need to build a wrapper interface to be run on js file. You can think of this as *importing javascript function to rust file*. In `lib.rs` file,
 
 ```rust
-extern create wasm_bindgen;
+extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 // Wrapper interface
