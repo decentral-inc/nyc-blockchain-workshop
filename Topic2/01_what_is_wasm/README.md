@@ -81,8 +81,8 @@ extern {
 With wasm-bindgen, you can also export rust code with javascript functions. Only pure rust code is supported to be compiled into wasm, which means rust wrapper library is not available to export to js. 
 ```rust
 #[wasm_bindgen]
-pub fn hello_world(name: &str) {
-    alert(&format!("Hello, {}!", name));
+pub fn greet(name: &str) {
+    alert(&format!("Hello person named, {}!", name));
 }
 ```
 
