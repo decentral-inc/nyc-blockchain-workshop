@@ -1,0 +1,17 @@
+{
+  "name": "wasm-tuto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@lingqingmeng/wasm-tuto": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
