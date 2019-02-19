@@ -121,6 +121,15 @@ substrate-ui new <dapp name>
 cd <dapp name>
 yarn install
 ```
+To run the web app,
+```bash
+yarn run dev
+```
+
+then you will be able to see UI like this.
+![substrate-ui](https://i.imgur.com/CZYdtzq.png)
+
+
 
 
 ### Reference
