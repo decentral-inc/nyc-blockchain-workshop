@@ -118,7 +118,7 @@ to make a new fronend app, simply run command
 
 ```bash
 substrate-ui-new <substrate project>
-cd <substrateproject>-ui
+cd <substrate project>-ui
 yarn install
 ```
 To run the web app,
