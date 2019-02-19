@@ -127,13 +127,14 @@ wasm.greet("world");
 
 # Fibonacci in rust 
 
-This package implements fibonacci in wasm. You should be in the dir `/nyc-blockchain-workshop/Topic2/01_what_is_wasm`
+This package implements fibonacci in wasm. You should be in the dir    
+`/nyc-blockchain-workshop/Topic2/01_what_is_wasm`   
   
 
 ```
 cargo new wasm-fib --lib
 cd wasm-fib
-npm adduser lingqingmeng
+npm adduser your_npm_username
 cat src/lib.rs
 ```
   
