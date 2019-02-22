@@ -1,8 +1,13 @@
 extern crate rand;
 extern crate secp256k1;
 use rand::OsRng;
-use secp256k1::{Message, Secp256k1, Signature, SecretKey, PublicKey};
-use std::str::FromStr;
+use secp256k1::{Message, Secp256k1, Signature, SecretKey, PublicKey, RecoveryId, RecoverableSignature, Error};
+use std::str::{FromStr};
+use std::{error};
+extern crate hex_slice;
+use hex_slice::AsHex;
+
+type Err = Error;
 
 /// macro which produces hexadecimal byte array from a string
 macro_rules! hex {
@@ -11,7 +16,14 @@ macro_rules! hex {
             from_hex($hex, &mut result).expect("valid hex string");
             result
         });
-    }
+}
+
+pub fn to_hex_string(bytes: Vec<u8>) -> String {
+  let strs: Vec<String> = bytes.iter()
+                               .map(|b| format!("{:02x}", b))
+                               .collect();
+  strs.connect("")
+}
 
 /// Returns secret key and public key hexstring
 /// # Example 
@@ -79,8 +91,7 @@ pub fn verify(msg_str: &str, sig_str: &str, pk_str: &str) -> bool {
 /// let msg_str = "ddacf"
 /// let msg_bytes = str_to_bytes(msg_str);
 /// ```
-pub fn str_to_bytes(str:&str) -> &[u8]{
-    
+pub fn str_to_bytes(str:&str) -> &[u8]{   
     let bytes = str.as_bytes();
     return bytes;
 }
@@ -131,6 +142,46 @@ pub fn sign_raw(sk_str: &str, msg: [u8; 32]) -> String {
     return sig.to_string();
 }
 
+/// Returns signed recoverable signature in hexstring
+/// # Arguments
+/// * `sk_str`: a string poimter for secret key
+/// * `msg`: a message hash byte array pointer 
+/// # Example 
+/// ```
+/// use ecdsa::sign;
+/// let signature = sign_raw_recoverable("3397b8b6faba3f83925dcffb51773a28f59530dd3cb6fccf6e3518094040ff70".[23,1213,42,123,12,32, .. 21]);
+/// ```
+pub fn sign_raw_recoverable(sk_str: &str, msg: [u8; 32]) -> (RecoveryId, String) {
+    let secp = Secp256k1::new();
+    let sk = SecretKey::from_str(sk_str).unwrap();
+    let msg = Message::from_slice(&msg[..]).unwrap();
+    let mut sig = secp.sign_recoverable(&msg, &sk);
+    let compact_sig = sig.serialize_compact();
+    let sig_str = to_hex_string(compact_sig.1.to_vec());
+    return (compact_sig.0, String::from(sig_str));
+}
+
+
+/// Returns recovered public key in ecdsa
+/// # Arguments
+/// * `msg`: a message hash byte array
+/// * `sig_str`: a string poimter for secret key
+/// * `recid` : a recovery id from recoverable signature
+/// # Example 
+/// ```
+/// use ecdsa::{verify, str_to_bytes};
+/// let msg_str = // message hash hex string
+/// let msg = str_to_bytes(msg_str);
+/// let is_self = verify_raw(msghash,"304402207eaa99cac098aed4cfd7779aae6fd5e547cfaefda81383b83cc4b3a4b01defeb02201b7dc1f51093896301a674a70e0cd037567a65aa3a89066efaf1d64eea7e8d840000","022da9ebc229b9436ae89781e12b5787c5e26c3bf555e522b500443df637a9a873");
+/// ```
+pub fn ecrecover(msg: [u8; 32], sig_str: &str, recid: RecoveryId) -> Result<PublicKey, Error> {
+    let sig_bytes = hex!(sig_str);
+    let rec_sig = RecoverableSignature::from_compact(&sig_bytes, recid).expect("compact signatures are 64 bytes; DER signatures are 68-72 bytes");
+    let msg = Message::from_slice(&msg[..]).unwrap();
+    let secp = Secp256k1::new();
+    secp.recover(&msg, &rec_sig)
+}
+
 /// Returns verified result in ecdsa
 /// # Arguments
 /// * `msg`: a message hash byte array
@@ -146,6 +197,6 @@ pub fn sign_raw(sk_str: &str, msg: [u8; 32]) -> String {
 pub fn verify_raw(msg: [u8; 32], sig_str: &str, pk_str: &str) -> bool {
     let secp = Secp256k1::new();
     let msg = Message::from_slice(&msg[..]).unwrap();
-    let byte_str = hex!(sig_str);
-    secp.verify(&msg, &Signature::from_der_lax(&byte_str).unwrap(), &PublicKey::from_str(pk_str).unwrap()).is_ok()
+    let byte = hex!(sig_str);
+    secp.verify(&msg, &Signature::from_der_lax(&byte).unwrap(), &PublicKey::from_str(pk_str).unwrap()).is_ok()
 }
