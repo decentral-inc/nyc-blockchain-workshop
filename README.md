@@ -5,17 +5,18 @@ We will send out finished projects after each tutorial. Code demonstration will 
 
 [![Watch the video](https://i.imgur.com/ZuPtXLC.jpg)](https://youtu.be/IvVbyLeSIRI)
 
-00:01 - Introduction and Background Sharing
+[00:01](https://www.youtube.com/watch?v=IvVbyLeSIRI&feature=youtu.be
+) - Introduction and Background Sharing
 
-01:50 - Explanation of Rust 
+[01:50](https://youtu.be/IvVbyLeSIRI?t=110 ) - Explanation of Rust 
 
-07:08 - Demo of Elliptic Curve Cryptography in Rust and Module Creation
+[07:08](https://youtu.be/IvVbyLeSIRI?t=428) - Demo of Elliptic Curve Cryptography in Rust and Module Creation
 
-24:01 - What is WebAssembly? (WASM)
+[24:01](https://youtu.be/IvVbyLeSIRI?t=1441) - What is WebAssembly? (WASM)
 
-27:55 - WASM Use Cases
+[27:55](https://youtu.be/IvVbyLeSIRI?t=1675) - WASM Use Cases
 
-36:50 - Introduction to Substrate
+[36:50](https://youtu.be/IvVbyLeSIRI?t=2210) - Introduction to Substrate
 
 
 # Overview
