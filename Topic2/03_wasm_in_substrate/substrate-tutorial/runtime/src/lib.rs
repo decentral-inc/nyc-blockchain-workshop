@@ -50,7 +50,7 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
-
+pub type Bet = u64;
 mod tutorial;
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
 /// the specifics of the runtime. They can then be made to be agnostic over specific formats
@@ -174,8 +174,11 @@ impl sudo::Trait for Runtime {
 }
 
 impl tutorial::Trait for Runtime {
+
+        type Bet = u64;
 	type Event = Event;
 }
+
 
 construct_runtime!(
 	pub enum Runtime with Log(InternalLog: DigestItem<Hash, Ed25519AuthorityId>) where

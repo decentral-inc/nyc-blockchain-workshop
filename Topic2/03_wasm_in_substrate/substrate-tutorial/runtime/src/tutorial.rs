@@ -1,12 +1,14 @@
 use support::{decl_storage, decl_module, StorageValue, dispatch::Result, decl_event};
 use {balances, system::{self, ensure_signed}};
-use runtime_primitives::traits::Hash;
+use runtime_primitives::traits::{Hash, As};
 use parity_codec::Encode;
 
 
 pub trait Trait: balances::Trait {
+    type Bet: As<u64>;
     type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
 }
+
 
 
 decl_storage! {
@@ -23,11 +25,12 @@ decl_storage! {
 decl_event!(
     pub enum Event<T>
     where
-        <T as balances::Trait>::Balance
+        <T as balances::Trait>::Balance,
+        <T as Trait>::Bet::_IMPL_DECODE_FOR_Event::_parity_codec::Decode
     {
         Win(Balance),
         Deposit(Balance),
-        Trial(u64),
+        Trial(Bet),
         Payment(Balance),
     }
 );
