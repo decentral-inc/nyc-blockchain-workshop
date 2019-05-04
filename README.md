@@ -1,7 +1,25 @@
-# nyc-blockchain-workshop
+# NYC Blockchain Workshop
+
 Workshop files used for Blockchain Developer Seminar: Applied Rust for Protocol Development
 
+For a full recap of this event check out our [newly published Medium post](https://medium.com/@decentral/new-york-goes-blockchain-ec1f04560124)
+
 We will send out finished projects after each tutorial. Code demonstration will be given live. If you prefer following along more than welcome to. We will release a video and a finalized codebase later this week. 
+
+[![Watch on Youtube](https://i.imgur.com/ZuPtXLC.jpg)](https://youtu.be/IvVbyLeSIRI)
+
+[00:01](https://www.youtube.com/watch?v=IvVbyLeSIRI&feature=youtu.be
+) - Introduction and Background Sharing
+
+[01:50](https://youtu.be/IvVbyLeSIRI?t=110 ) - Explanation of Rust 
+
+[07:08](https://youtu.be/IvVbyLeSIRI?t=428) - Demo of Elliptic Curve Cryptography in Rust and Module Creation
+
+[24:01](https://youtu.be/IvVbyLeSIRI?t=1441) - What is WebAssembly? (WASM)
+
+[27:55](https://youtu.be/IvVbyLeSIRI?t=1675) - WASM Use Cases
+
+[36:50](https://youtu.be/IvVbyLeSIRI?t=2210) - Introduction to Substrate
 
 
 # Overview
